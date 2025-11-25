@@ -2,9 +2,13 @@
 
 Multi-app installer for M5 CardPuter - A comprehensive application launcher and management system that allows you to install and run multiple applications on your M5 CardPuter device.
 
+![Boot Logo](pics/boot_logo.png)
+
 ## Overview
 
 M5Apps is a full-featured firmware bundle that transforms your M5 CardPuter into a versatile multi-application platform. Install up to 16 applications (limited only by your CardPuter flash size) and manage them through an intuitive user interface. The system supports remote repositories, SD cards, and USB drives for easy app installation.
+
+![Menu](pics/menu.png)
 
 ## Features
 
@@ -22,10 +26,17 @@ M5Apps is a full-featured firmware bundle that transforms your M5 CardPuter into
 
 1. **Launcher** - Main application launcher with smooth menu navigation
 2. **Installer** - Install apps from various sources (cloud, SD card, USB)
+   ![Installer](pics/installer.png)
 3. **Settings** - System configuration and user preferences
+   ![Settings](pics/settings.png)
 4. **FDISK** - Partition management tool for flash storage
+   ![FDISK](pics/fdisk.png)
 5. **Finder** - Two-panel file manager for SD card and USB drive
+   ![Finder](pics/finder.png)
 6. **Flood** - Advanced mesh chat application with channels and history using ESP-NOW
+   ![Flood](pics/flood.png)
+   UI hints for Flood app:
+   ![Flood Hint](pics/flood_hint.png)
 
 ### System Features
 
