@@ -1,0 +1,31 @@
+# M5Apps NVS file
+key,type,encoding,value
+system,namespace,,
+brightness,data,i32,255
+volume,data,i32,100
+use_led,data,u8,1
+dim_time,data,i32,30
+boot_sound,data,u8,1
+show_bat_volt,data,u8,1
+show_time,data,u8,1
+last_app,data,u8,1
+last_app_to,data,i32,3
+installer,namespace,,
+run_on_install,data,u8,1
+custom_install,data,u8,0
+dl_path,data,string,"/sdcard/downloads"
+wifi,namespace,,
+enabled,data,u8,0
+ssid,data,string,""
+pass,data,string,""
+static_ip,data,u8,0
+ip,data,string,"192.168.1.100"
+mask,data,string,"255.255.255.0"
+gw,data,string,"192.168.1.1"
+dns,data,string,"8.8.8.8"
+flood,namespace,,
+node_name,data,string,"Flooder"
+channel,data,u8,1
+hello_interval,data,i32,60
+max_ttl,data,u8,5
+sort_mode,data,string,"last seen"

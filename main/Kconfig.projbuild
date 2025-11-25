@@ -1,0 +1,69 @@
+menu "Flood Configuration"
+
+    config FLOOD_CHANNEL
+        int "WiFi Channel, should be the same for all devices in the mesh network"
+        default 1
+        range 0 14
+        help
+            The channel on which the mesh network operates.
+
+    config FLOOD_DEVICE_NAME
+        string "Default Device Name, will be appended by node id"
+        default "Flooder"
+        help
+            Name of this device in the mesh network (max 32 characters).
+
+    choice FLOOD_DEVICE_ROLE
+        prompt "Device Role"
+        default FLOOD_MESH_ROLE_CLIENT
+        help
+            Select the role of this device in the mesh network.
+
+        config FLOOD_MESH_ROLE_CLIENT
+            bool "Client"
+            help
+                End-user device (chat devices).
+
+        config FLOOD_MESH_ROLE_ROUTER
+            bool "Router"
+            help
+                Infrastructure/relay device (always-on).
+                Full forwarding for maximum coverage.
+
+        config FLOOD_MESH_ROLE_REPEATER
+            bool "Repeater"
+            help
+                Network infrastructure node (extend range).
+                Optimized forwarding for range extension.
+    endchoice
+
+    config FLOOD_DEVICE_CAPABILITIES
+        hex "Device Capabilities (for future use)"
+        default 0x01
+        help
+            Device capabilities bitmask:
+            - 0x01: Battery Powered
+            - 0x02: Can Store and Forward messages
+
+    config FLOOD_MAX_TTL
+        int "Maximum TTL"
+        default 10
+        range 1 50
+        help
+            Maximum Time To Live for flooded messages.
+
+    config FLOOD_CACHE_SIZE
+        int "Message Duplicate Detection Cache Size"
+        default 100
+        range 50 500
+        help
+            Maximum number of messages to cache for duplicate detection (to prevent flooding).
+
+    config FLOOD_QUEUE_SIZE
+        int "Message Send Queue Size"
+        default 10
+        range 5 20
+        help
+            Maximum number of messages in the send queue.
+
+endmenu
