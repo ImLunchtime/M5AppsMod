@@ -24,7 +24,7 @@ M5Apps is a full-featured firmware bundle that transforms your M5 CardPuter into
 
 ### Built-in Applications
 
-1. **Launcher** - Main application launcher with smooth menu navigation
+1. **Launcher** - Main application launcher with smooth menu navigation. Use `I` key for information about the app. Use `ENTER` key to open the app. Use `Home` button (on the side) to go back to the launcher.
 2. **Installer** - Install apps from various sources (cloud, SD card, USB)
    ![Installer](pics/installer.png)
 3. **Settings** - System configuration and user preferences
@@ -178,6 +178,9 @@ apps_app   app   factory  0x10000  0x180000
 3. Select the app you want to install
 4. Follow the installation prompts
 
+   **Cloud source**: has a mirror of `M5Burner` CardPuter category, refreshing automtically once an hour. `TOP-20` is the list of tested and usefull apps by the community. Remote files are downloaded in `/sdcard/downloads` (configurable in settings) before installation and can be re-installed manually later.
+   Apps distributed as single partition images are flashing to the device directly. Multiple partition images are also supported. User can remove all installed apps, or use `Custom install` option in settings to install ony selected partitions of multiple partition images (confirmation request dialog is shown).
+
 ### Settings
 
 Access the **Settings** app to configure:
@@ -194,7 +197,7 @@ Access the **Settings** app to configure:
 - **Arrow Keys**: Navigate menus
 - **ENTER**: Select/Confirm
 - **ESC**: Cancel/Go back
-- **CTRL + SPACE**: Take screenshot
+- **CTRL + SPACE**: Take screenshot, save to `/sdcard/m5apps/screenshots` in BMP format
 
 ## Configuration
 
