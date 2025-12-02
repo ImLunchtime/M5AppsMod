@@ -110,14 +110,14 @@ extern "C" void app_main(void)
     auto launcher = new APPS::Launcher_Packer;
     mooncake.installApp(launcher);
 
+    // Install OTA apps
+    install_ota_apps(mooncake);
+
     // Install system apps
     mooncake.installApp(new APPS::AppSettings_Packer);
     mooncake.installApp(new APPS::AppInstaller_Packer);
     mooncake.installApp(new APPS::AppFdisk_Packer);
     mooncake.installApp(new APPS::AppFinder_Packer);
-
-    // Install OTA apps
-    install_ota_apps(mooncake);
     // Create launcher
     mooncake.createApp(launcher);
 
