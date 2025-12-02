@@ -206,14 +206,12 @@ void AppFinder::_update_panel_file_list(PanelData_t& panel)
     // Special-case root: manually expose mounted sources
     if (panel.current_path == "/")
     {
-        // unmount usb and sdcard if mounted
-        _data.hal->usb()->unmount();
+        // unmount sdcard if mounted
         _data.hal->sdcard()->eject();
-        // add sdcard and usb to file list
+        // add sdcard to file list
         panel.file_list.clear();
         panel.file_list.shrink_to_fit();
         panel.file_list.push_back(SD_CARD_ITEM);
-        panel.file_list.push_back(USB_ITEM);
         // no more files in root
         return;
     }
@@ -236,23 +234,7 @@ void AppFinder::_update_panel_file_list(PanelData_t& panel)
                 return;
             }
         }
-        else if (panel.current_path == "/usb")
-        {
-            _mount_usb();
-            if (!_data.hal->usb()->is_mounted())
-            {
-                // show error dialog
-                UTILS::UI::show_error_dialog(_data.hal, "USB not found", "Plug a USB drive and try again");
-                // failback to root
-                panel.current_path = "/";
-                // redraw all
-                _data.left_panel.panel_info_needs_update = true;
-                _data.right_panel.panel_info_needs_update = true;
-                _data.left_panel.needs_update = true;
-                _data.right_panel.needs_update = true;
-                return;
-            }
-        }
+        
         // Add parent directory entry if not in root
         panel.file_list.clear();
         panel.file_list.shrink_to_fit();

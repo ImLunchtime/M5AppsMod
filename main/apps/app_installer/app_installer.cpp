@@ -972,7 +972,7 @@ bool AppInstaller::_handle_file_selection()
                     {
                         // chck if dest path starts from /sdcard
                         std::string dl_path = _data.hal->settings()->getString("installer", "dl_path");
-                        if (dl_path.find("/sdcard") != 0 && dl_path.find("/usb") != 0)
+                        if (dl_path.find("/sdcard") != 0)
                         {
                             UTILS::UI::show_error_dialog(_data.hal,
                                                          "Invalid download path",
@@ -1217,12 +1217,6 @@ void AppInstaller::_update_source_list()
                      56,
                      image_data_sd_big,
                      "Install apps from SD card. Supported media: SDHC (up to 32Gb). Supported file systems: FAT32"));
-    _data.sources.push_back(SelectItem_t("USB Drive",
-                                         0,
-                                         80,
-                                         image_data_usb_flash,
-                                         "Install apps from USB drive. Supported media: USB flash drive, partition size up to "
-                                         "32Gb. Supported file systems: FAT32"));
     _data.update_source_list = true;
 }
 

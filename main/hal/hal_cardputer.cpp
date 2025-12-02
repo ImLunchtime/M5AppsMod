@@ -119,7 +119,6 @@ void HalCardputer::init()
     _init_button();
     _init_bat();
     _init_sdcard();
-    _init_usb();
     _init_led();
     _init_wifi();
 }

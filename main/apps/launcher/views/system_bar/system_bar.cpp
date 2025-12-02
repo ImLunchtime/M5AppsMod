@@ -88,13 +88,7 @@ void Launcher::_update_system_bar()
         }
         _data.hal->canvas_system_bar()->pushImage(x, y, 16, 16, image_data, THEME_COLOR_ICON_16);
         x += 16 + PADDING_X;
-        // USB
-        bool usb_connected = _data.hal->usb()->is_connected();
-        if (usb_connected)
-        {
-            _data.hal->canvas_system_bar()->pushImage(x, y, 26, 16, image_data_usb1, THEME_COLOR_ICON_16);
-            x += 26 + PADDING_X;
-        }
+        
 
         _data.hal->canvas_system_bar()->setFont(FONT_16);
         // Time
