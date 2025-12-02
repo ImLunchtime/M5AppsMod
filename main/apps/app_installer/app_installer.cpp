@@ -1411,8 +1411,13 @@ void AppInstaller::_install_firmware(const std::string& filepath)
             }
             else if (partition.subtype == ESP_PARTITION_SUBTYPE_DATA_PHY)
             {
-                // skip phy data partition
                 _installation_progress_callback(-1, "Skipping PHY...", this);
+                delay(500);
+                continue;
+            }
+            else if (partition.subtype == ESP_PARTITION_SUBTYPE_DATA_SPIFFS)
+            {
+                _installation_progress_callback(-1, "Skipping SPIFFS...", this);
                 delay(500);
                 continue;
             }

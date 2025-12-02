@@ -1,3 +1,29 @@
+/*
+ *                        _oo0oo_
+ *                       o8888888o
+ *                       88" . "88
+ *                       (| -_- |)
+ *                       0\  =  /0
+ *                     ___/`---'\___
+ *                   .' \\|     |// '.
+ *                  / \\|||  :  |||// \
+ *                 / _||||| -:- |||||- \
+ *                |   | \\\  - /// |   |
+ *                | \_|  ''\---/''  |_/ |
+ *                \  .-\__  '-'  ___/-. /
+ *              ___'. .'  /--.--\  `. .'___
+ *           ."" '<  `.___\_<|>_/___.' >' "".
+ *          | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+ *          \  \ `_.   \_ __\ /__ _/   .-` /  /
+ *      =====`-.____`.___ \_____/___.-`___.-'=====
+ *                        `=---='
+ * 
+ * 
+ *      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * 
+ *            佛祖保佑     永不宕机     永无BUG
+ */
+
 /**
  * @file cardputer.cpp
  * @author d4rkmen
@@ -16,7 +42,8 @@
 #include "esp_log.h"
 #include "esp_partition.h"
 #include "apps/utils/flash/flash_tools.h"
-#include "flood.h"
+
+
 
 static const char* TAG = "MAIN";
 
@@ -88,7 +115,6 @@ extern "C" void app_main(void)
     mooncake.installApp(new APPS::AppInstaller_Packer);
     mooncake.installApp(new APPS::AppFdisk_Packer);
     mooncake.installApp(new APPS::AppFinder_Packer);
-    mooncake.installApp(new APPS::AppFlood_Packer);
 
     // Install OTA apps
     install_ota_apps(mooncake);

@@ -285,7 +285,7 @@ namespace HAL
         channel_info_t _ch_info[sound_channel_max];
 
         speaker_config_t _cfg;
-        volatile uint8_t _master_volume = 64;
+        volatile uint8_t _master_volume = 0;
 
         volatile bool _task_running = false;
         std::atomic<uint16_t> _play_channel_bits = {0};

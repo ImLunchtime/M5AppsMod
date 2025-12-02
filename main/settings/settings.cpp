@@ -52,7 +52,7 @@ namespace SETTINGS
         sys_group.items = {
             back_item,
             {"brightness", "Brightness", TYPE_NUMBER, "100", "100", "10", "255", "Screen brightness level (10-255)"},
-            {"volume", "Volume", TYPE_NUMBER, "64", "64", "0", "255", "System sound volume level (0-255)"},
+            {"volume", "Volume", TYPE_NUMBER, "0", "0", "0", "255", "System sound volume level (0-255)"},
             {"use_led", "Use LED", TYPE_BOOL, "true", "true", "", "", "Use LED for system notifications"},
             {"dim_time", "Dim seconds", TYPE_NUMBER, "30", "30", "0", "3600", "Screen dimming time in seconds (0-3600)"},
             {"boot_sound", "Boot sound", TYPE_BOOL, "true", "true", "", "", "Play boot sound on startup"},
@@ -107,26 +107,7 @@ namespace SETTINGS
                                   "",
                                   "",
                                   "Path to store temp files downloaded from the internet"}};
-        SettingGroup_t flood_group;
-        flood_group.name = "Flood settings";
-        flood_group.nvs_namespace = "flood";
-        flood_group.items = {
-            back_item,
-            {"node_name", "Node name", TYPE_STRING, "Flooder", "Flooder", "", "32", "Node name in the mesh network"},
-            // {"device_role", "Device role", TYPE_STRING, "router", "router", "client;router;repeater", "", "Device role in the
-            // mesh network"},
-            {"hello_interval", "Hello interval", TYPE_NUMBER, "60", "60", "30", "3600", "Hello interval in the mesh network"},
-            {"channel", "Channel", TYPE_NUMBER, "1", "1", "0", "14", "WiFi channel for the mesh network (0-14)"},
-            {"max_ttl", "Max TTL", TYPE_NUMBER, "5", "5", "1", "9", "Max TTL (hops count for packets) in the mesh network"},
-            {"sort_mode",
-             "Sort mode",
-             TYPE_STRING,
-             "last seen",
-             "last seen",
-             "last seen;signal;name;role;hops;battery",
-             "",
-             "Sort mode for nodes list"},
-        };
+        
 
         SettingGroup_t export_group;
         export_group.name = "Export (SD card)";
@@ -135,7 +116,7 @@ namespace SETTINGS
         import_group.name = "Import (SD card)";
         import_group.items = {};
 
-        _metadata = {wifi_group, sys_group, installer_group, flood_group, export_group, import_group};
+        _metadata = {wifi_group, sys_group, installer_group, export_group, import_group};
     }
 
     Settings::~Settings()

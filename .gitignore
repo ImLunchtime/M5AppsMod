@@ -4,3 +4,4 @@ managed_components
 docs
 archive
 *.cmd
+.cache

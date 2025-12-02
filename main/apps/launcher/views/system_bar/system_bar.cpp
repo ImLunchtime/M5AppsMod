@@ -23,7 +23,6 @@
 #include "assets/wifi5.h"
 #include "assets/wifi6.h"
 #include "assets/usb1.h"
-#include "flood.h"
 
 using namespace MOONCAKE::APPS;
 
@@ -63,63 +62,32 @@ void Launcher::_update_system_bar()
         int x = 10;
         int y = 5;
 
-        // Flood running indicator
-        bool flood_running = false;
-        auto lc_list = mcAppGetFramework()->getAppManager().getAppLifecycleList();
-        if (lc_list)
-            for (auto& lc : *lc_list)
-            {
-                if (lc.app->getAppName() == "FLOOD")
-                {
-                    flood_running = true;
-                    break;
-                }
-            }
-        if (flood_running)
+        // WiFi indicator
+        uint16_t* image_data = nullptr;
+        switch (_data.system_state.wifi_status)
         {
-            // Draw colored node identifier
-            uint8_t our_mac[6];
-            flood_get_our_mac(our_mac);
-            int node_color = flood_get_device_color(our_mac);
-            int node_text_color = flood_get_device_text_color(our_mac);
-            std::string item_id = std::format("{:04x}", flood_get_device_id(our_mac));
-            int short_width = 4 * 6 + 6;
-            _data.hal->canvas_system_bar()->fillRoundRect(x, y + 1, short_width, 14, 4, node_color);
-            _data.hal->canvas_system_bar()->setFont(FONT_12);
-            _data.hal->canvas_system_bar()->setTextColor(node_text_color, node_color);
-            _data.hal->canvas_system_bar()->drawCenterString(item_id.c_str(), x + short_width / 2, y + 1);
-            x += short_width + PADDING_X;
+        case HAL::WIFI_STATUS_CONNECTED_STRONG:
+            image_data = (uint16_t*)image_data_wifi1;
+            break;
+        case HAL::WIFI_STATUS_CONNECTED_GOOD:
+            image_data = (uint16_t*)image_data_wifi2;
+            break;
+        case HAL::WIFI_STATUS_CONNECTED_WEAK:
+            image_data = (uint16_t*)image_data_wifi3;
+            break;
+        case HAL::WIFI_STATUS_DISCONNECTED:
+            image_data = (uint16_t*)image_data_wifi4;
+            break;
+        case HAL::WIFI_STATUS_CONNECTING:
+            image_data = (uint16_t*)image_data_wifi5;
+            break;
+        case HAL::WIFI_STATUS_IDLE:
+        default:
+            image_data = (uint16_t*)image_data_wifi6;
+            break;
         }
-        else
-        {
-            // Wifi, show when no FLOOD
-            uint16_t* image_data = nullptr;
-
-            switch (_data.system_state.wifi_status)
-            {
-            case HAL::WIFI_STATUS_CONNECTED_STRONG:
-                image_data = (uint16_t*)image_data_wifi1;
-                break;
-            case HAL::WIFI_STATUS_CONNECTED_GOOD:
-                image_data = (uint16_t*)image_data_wifi2;
-                break;
-            case HAL::WIFI_STATUS_CONNECTED_WEAK:
-                image_data = (uint16_t*)image_data_wifi3;
-                break;
-            case HAL::WIFI_STATUS_DISCONNECTED:
-                image_data = (uint16_t*)image_data_wifi4;
-                break;
-            case HAL::WIFI_STATUS_CONNECTING:
-                image_data = (uint16_t*)image_data_wifi5;
-                break;
-            case HAL::WIFI_STATUS_IDLE:
-            default:
-                image_data = (uint16_t*)image_data_wifi6;
-                break;
-            }
-            _data.hal->canvas_system_bar()->pushImage(x, y, 16, 16, image_data, THEME_COLOR_ICON_16);
-            x += 16 + PADDING_X;
-        }
+        _data.hal->canvas_system_bar()->pushImage(x, y, 16, 16, image_data, THEME_COLOR_ICON_16);
+        x += 16 + PADDING_X;
         // USB
         bool usb_connected = _data.hal->usb()->is_connected();
         if (usb_connected)
