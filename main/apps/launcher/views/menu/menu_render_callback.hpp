@@ -89,11 +89,15 @@ public:
                 // Icon
                 if (item->userData != nullptr)
                 {
+                    bool prev_swap = _hal->canvas()->getSwapBytes();
+                    _hal->canvas()->setSwapBytes(true);
                     _hal->canvas()->pushImage(item->x - (ICON_SELECTED_WIDTH - item->width) / 2 + x_offset + 4,
                                               item->y - (ICON_SELECTED_WIDTH - item->height) / 2 + 4,
                                               56,
                                               56,
-                                              ((AppIcon_t*)(item->userData))->iconBig);
+                                              ((AppIcon_t*)(item->userData))->iconBig,
+                                              (uint16_t)0x3ce7);
+                    _hal->canvas()->setSwapBytes(prev_swap);
                 }
 
                 // Draw tag
@@ -127,6 +131,8 @@ public:
                     if (((AppIcon_t*)(item->userData))->iconSmall == nullptr)
                     {
                         // no small image, render with resize to 40x40 from big image
+                        bool prev_swap = _hal->canvas()->getSwapBytes();
+                        _hal->canvas()->setSwapBytes(true);
                         _hal->canvas()->pushImageRotateZoom((float)(item->x + x_offset + 4),
                                                             (float)(item->y + 4),
                                                             0.0,
@@ -136,16 +142,22 @@ public:
                                                             0.7,
                                                             56,
                                                             56,
-                                                            ((AppIcon_t*)(item->userData))->iconBig);
+                                                            ((AppIcon_t*)(item->userData))->iconBig,
+                                                            (uint16_t)0x3ce7);
+                        _hal->canvas()->setSwapBytes(prev_swap);
                     }
                     else
                     {
                         // have small image, render it
+                        bool prev_swap = _hal->canvas()->getSwapBytes();
+                        _hal->canvas()->setSwapBytes(true);
                         _hal->canvas()->pushImage(item->x + x_offset + 4,
                                                   item->y + 4,
                                                   40,
                                                   40,
-                                                  ((AppIcon_t*)(item->userData))->iconSmall);
+                                                  ((AppIcon_t*)(item->userData))->iconSmall,
+                                                  (uint16_t)0x3ce7);
+                        _hal->canvas()->setSwapBytes(prev_swap);
                     }
                 }
 
