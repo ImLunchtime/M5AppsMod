@@ -121,6 +121,7 @@ extern "C" void app_main(void)
     // Create launcher
     mooncake.createApp(launcher);
 
+    
     // Update framework
     while (1)
         mooncake.update();

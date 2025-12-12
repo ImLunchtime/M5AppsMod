@@ -1454,8 +1454,25 @@ void AppInstaller::_install_firmware(const std::string& filepath)
         size_t free_space = flash_ptable.getFreeSpace(partition.type);
         if (free_space < partition.pos.size)
         {
-            _handle_installation_error(FlashStatus::ERROR_INSUFFICIENT_SPACE);
-            return;
+            if (p_count == 1 && _show_confirmation_dialog("Insufficient space", "Uninstall other apps?"))
+            {
+                if (!flash_ptable.makeDefaultPartitions())
+                {
+                    _handle_installation_error(FlashStatus::ERROR_UNKNOWN);
+                    return;
+                }
+                free_space = flash_ptable.getFreeSpace(partition.type);
+                if (free_space < partition.pos.size)
+                {
+                    _handle_installation_error(FlashStatus::ERROR_INSUFFICIENT_SPACE);
+                    return;
+                }
+            }
+            else
+            {
+                _handle_installation_error(FlashStatus::ERROR_INSUFFICIENT_SPACE);
+                return;
+            }
         }
         esp_partition_info_t* pi =
             flash_ptable.addPartition(partition.type, subtype, label, 0, partition.pos.size, partition.flags);
